@@ -1,11 +1,10 @@
+import autoprefixer from 'autoprefixer';
 import * as esbuild from 'esbuild';
-import { readFile, writeFile, mkdir, cp, rm } from 'fs/promises';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { cp, mkdir, readFile, rm, writeFile } from 'fs/promises';
+import { dirname, resolve } from 'path';
 import postcss from 'postcss';
 import tailwindcss from 'tailwindcss';
-import autoprefixer from 'autoprefixer';
-import postcssConfig from './postcss.config.js';
+import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -46,16 +45,16 @@ const htmlPlugin = (options = {}) => ({
         'utf8'
       );
 
-      // Get output files
+      // Get output files (strip 'dist/' prefix for paths)
       const jsFile = result.metafile?.outputs 
-        ? Object.keys(result.metafile.outputs).find(f => f.endsWith('.js'))
+        ? Object.keys(result.metafile.outputs).find(f => f.endsWith('.js'))?.replace('dist/', '')
         : 'assets/index.js';
       
       const cssFile = result.metafile?.outputs
-        ? Object.keys(result.metafile.outputs).find(f => f.endsWith('.css'))
+        ? Object.keys(result.metafile.outputs).find(f => f.endsWith('.css'))?.replace('dist/', '')
         : 'assets/index.css';
 
-      // Replace module script with bundled script
+      // Replace module script with bundled script (use relative paths)
       let html = htmlTemplate
         .replace(
           '<script type="module" src="/src/main.tsx"></script>',
@@ -98,6 +97,7 @@ export async function build(options = {}) {
         '.jsx': 'jsx',
         '.js': 'jsx',
       },
+      jsx: 'automatic',
       define: {
         'process.env.NODE_ENV': '"production"',
       },
