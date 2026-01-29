@@ -1,19 +1,46 @@
-import { AmountInput, Button } from '@ledgerhq/ldls-ui-react';
-import { Android } from '@ledgerhq/ldls-ui-react/symbols';
+import { useState } from 'react';
 import './App.css';
+import { Button, ThemeProvider } from '@ledgerhq/lumen-ui-react';
+import TablePocGroupingTanstackExample from './components/TablePocGroupingTanstackExample';
+import TablePocSubGroupsAlternative from './components/TablePocSubGroupsAlternative';
+import TablePocSubGroups from './components/TablePocSubGroups';
 
-
+type TableView = 'grouping-example' | 'subgroups-alternative' | 'subgroups';
 
 function App() {
+  const [activeTable, setActiveTable] = useState<TableView>('grouping-example');
+
   return (
-    <div className='flex flex-col items-center justify-center w-full h-screen'>
-      <Button icon={Android} asChild appearance='accent' size='sm'><a href='/'>Click me</a></Button>
-      <AmountInput onChange={() => {}} value={0} />
-      <div className='mt-12 bg-error-strong size-112'>test tokens</div>
-      <div className='mt-12 bg-success-strong size-112'>test tokens</div>
-      <div className='mt-12 bg-warning-strong size-112'>test tokens</div>
+        <ThemeProvider>
+    <div className='p-4'>
+      <div className='flex gap-2 mb-4'>
+        <Button
+          onClick={() => setActiveTable('grouping-example')}
+        >
+          Grouping Example
+        </Button>
+        
+        <Button
+          onClick={() => setActiveTable('subgroups-alternative')}
+        >
+          SubGroups Alternative
+        </Button>
+        
+        <Button
+          onClick={() => setActiveTable('subgroups')}
+        >
+          SubGroups
+        </Button>
+      </div>
+
+      <div>
+        {activeTable === 'grouping-example' && <TablePocGroupingTanstackExample />}
+        {activeTable === 'subgroups-alternative' && <TablePocSubGroupsAlternative />}
+        {activeTable === 'subgroups' && <TablePocSubGroups />}
+      </div>
     </div>
-  )
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

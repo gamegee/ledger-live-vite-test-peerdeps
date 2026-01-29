@@ -11,8 +11,11 @@
     "preview": "npx serve dist"
   },
   "dependencies": {
+    "@faker-js/faker": "^10.2.0",
     "@ledgerhq/ldls-design-core": "^0.0.33",
     "@ledgerhq/ldls-ui-react": "^0.0.51",
+    "@ledgerhq/lumen-design-core": "^0.0.44-1",
+    "@ledgerhq/lumen-ui-react": "^0.0.72",
     "@primer/octicons-react": "^19.21.0",
     "@tanstack/react-table": "^8.21.3",
     "lucide-react": "^0.554.0",
