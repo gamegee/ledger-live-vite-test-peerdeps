@@ -89,7 +89,6 @@ export default function TablePocSubGroupsAlternative() {
     debugTable: true,
   });
 
-
   return (
     <div className="p-2">
       <div className="flex gap-2 mb-4">
@@ -320,7 +319,7 @@ export default function TablePocSubGroupsAlternative() {
             table.setPageSize(Number(e.target.value));
           }}
         >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
+          {[5, 10, 20, 30, 40, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>
