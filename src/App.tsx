@@ -12,7 +12,7 @@ function App() {
   const [activeTable, setActiveTable] = useState<TableView>('grouping-example');
 
   return (
-  <ThemeProvider defaultMode="dark">
+  <ThemeProvider defaultMode="light">
     <div className='p-4'>
       <div className='flex gap-2 mb-4'>
         <Button
