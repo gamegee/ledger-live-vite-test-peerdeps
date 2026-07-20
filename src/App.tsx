@@ -1,6 +1,16 @@
 import "./App.css";
 import { useState } from "react";
-import { ThemeProvider, Button, IconButton, SearchInput, Divider } from "@ledgerhq/lumen-ui-react";
+import {
+  ThemeProvider,
+  Button,
+  IconButton,
+  Divider,
+  SegmentedControl,
+  SegmentedControlButton,
+} from "@ledgerhq/lumen-ui-react";
+import { Search } from "@ledgerhq/lumen-ui-react/symbols";
+import { AnimatedPlaceholderInput } from "./components/AnimatedPlaceholderInput";
+import { AmountInputPlayground } from "./components/amount-inputs/AmountInputPlayground";
 import {
   SideBar,
   SideBarLeading,
@@ -147,19 +157,29 @@ function AssetTable({ assets, title, count }: { assets: typeof CRYPTOS; title: s
   );
 }
 
-function App() {
+function Dashboard() {
   const [activeNav, setActiveNav] = useState("home");
 
   return (
-    <ThemeProvider colorScheme="dark">
-      <div className="bg-canvas min-h-screen flex flex-col">
+    <div className="bg-canvas min-h-screen flex flex-col">
         {/* Top Bar */}
         <header className="flex items-center justify-between pl-[86px] pr-32 pt-32 pb-24 relative z-10">
           <div className="flex items-center gap-[86px]">
             <svg width="100" height="34" viewBox="0 0 100 34" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 0.5H5.5V27.76H19.07V33.13H0V0.5ZM22.37 0.5H42.11V5.87H27.87V14.06H40.37V19.43H27.87V27.76H42.24V33.13H22.37V0.5ZM45.81 16.87C45.81 7.5 52.87 0 62.12 0C67.87 0 72.12 2.62 74.75 6.62L70 9.37C68.25 6.5 65.37 4.87 62.12 4.87C55.87 4.87 51.37 9.87 51.37 16.75C51.37 23.62 55.87 28.75 62.12 28.75C65.37 28.75 68.25 27.12 70 24.25L74.75 26.87C72 31 67.87 33.63 62.12 33.63C52.87 33.63 45.81 26.25 45.81 16.87ZM76.56 16.87C76.56 7.5 83.56 0 92.93 0C97.43 0 100 1.37 100 1.37V6.75C100 6.75 97.37 5 93.18 5C86.93 5 82.18 10 82.18 16.87C82.18 23.75 86.93 28.75 93.18 28.75C97.37 28.75 100 27 100 27V32.25C100 32.25 97.43 33.63 92.93 33.63C83.56 33.63 76.56 26.25 76.56 16.87Z" fill="currentColor" className="text-base" />
             </svg>
-            <SearchInput placeholder="Search asset, Dapps" className="w-[454px]" />
+            <AnimatedPlaceholderInput
+              icon={Search}
+              className="w-[454px]"
+              placeholders={[
+                "Search assets",
+                "Search Dapps",
+                "Search Bitcoin",
+                "Search Ethereum",
+                "Swap, buy or sell",
+              ]}
+              aria-label="Search"
+            />
           </div>
           <div className="flex items-center gap-12">
             <IconButton icon={Refresh} appearance="transparent" size="md" aria-label="Refresh" />
@@ -282,6 +302,29 @@ function App() {
             </div>
           </main>
         </div>
+    </div>
+  );
+}
+
+function App() {
+  const [view, setView] = useState<"playground" | "dashboard">("playground");
+
+  return (
+    <ThemeProvider colorScheme="dark">
+      <div className="bg-canvas min-h-screen">
+        <div className="flex justify-center pt-16">
+          <SegmentedControl
+            selectedValue={view}
+            onSelectedChange={(v) => setView(v as "playground" | "dashboard")}
+            tabLayout="fit"
+          >
+            <SegmentedControlButton value="playground">
+              AmountInput playground
+            </SegmentedControlButton>
+            <SegmentedControlButton value="dashboard">Dashboard</SegmentedControlButton>
+          </SegmentedControl>
+        </div>
+        {view === "playground" ? <AmountInputPlayground /> : <Dashboard />}
       </div>
     </ThemeProvider>
   );
