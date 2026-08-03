@@ -13,8 +13,9 @@
   "dependencies": {
     "@faker-js/faker": "^10.2.0",
     "@ledgerhq/crypto-icons": "^1.4.0",
-    "@ledgerhq/lumen-design-core": "^0.1.14",
-    "@ledgerhq/lumen-ui-react": "https://github.com/LedgerHQ/lumen/releases/download/dev-pr-707/ledgerhq-lumen-ui-react-0.1.33-pr.707.3459891.tgz",
+    "@ledgerhq/lumen-design-core": "^0.1.23",
+    "@ledgerhq/lumen-ui-react": "^0.1.49",
+    "@ledgerhq/lumen-ui-rnative": "^0.1.52",
     "@tanstack/react-table": "^8.21.3",
     "class-variance-authority": "^0.7.1",
     "lucide-react": "^0.554.0",
