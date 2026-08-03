@@ -76,7 +76,7 @@ esbuild is significantly faster than Vite's build process:
 ## 🔧 Configuration
 
 ### Build Config (`esbuild.config.js`)
-- Handles CSS with PostCSS (Tailwind + Autoprefixer)
+- Handles CSS with PostCSS (`@tailwindcss/postcss`)
 - Generates production-ready bundles
 - Creates HTML with proper asset references
 - Supports TypeScript and JSX/TSX

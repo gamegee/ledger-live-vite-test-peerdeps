@@ -1,9 +1,8 @@
-import autoprefixer from 'autoprefixer';
+import tailwindcss from '@tailwindcss/postcss';
 import * as esbuild from 'esbuild';
 import { cp, mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { dirname, resolve } from 'path';
 import postcss from 'postcss';
-import tailwindcss from 'tailwindcss';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -18,10 +17,9 @@ const cssPlugin = {
       const css = await readFile(args.path, 'utf8');
       
       // Process with PostCSS
-      const result = await postcss([
-        tailwindcss,
-        autoprefixer,
-      ]).process(css, { from: args.path });
+      const result = await postcss([tailwindcss]).process(css, {
+        from: args.path,
+      });
 
       cssContents.set(args.path, result.css);
       

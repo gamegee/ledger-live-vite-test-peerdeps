@@ -1,3 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import '@ledgerhq/lumen-ui-react/tailwind.css';
+
+/* Lumen ships its design tokens as a Tailwind preset, which is only expressible
+   in a JS config, so v4 loads it through @config rather than CSS-first @theme. */
+@config '../tailwind.config.js';
