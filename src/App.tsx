@@ -5,20 +5,11 @@ import {
   Button,
   IconButton,
   Divider,
-  SegmentedControl,
-  SegmentedControlButton,
-} from "@ledgerhq/lumen-ui-react";
-import { Search } from "@ledgerhq/lumen-ui-react/symbols";
-import { AnimatedPlaceholderInput } from "./components/AnimatedPlaceholderInput";
-import { AmountInputPlayground } from "./components/amount-inputs/AmountInputPlayground";
-import {
   SideBar,
   SideBarLeading,
   SideBarTrailing,
   SideBarItem,
   SideBarCollapseToggle,
-} from "@ledgerhq/lumen-ui-react";
-import {
   Subheader,
   SubheaderTitle,
   SubheaderRow,
@@ -26,6 +17,7 @@ import {
   SubheaderShowMore,
 } from "@ledgerhq/lumen-ui-react";
 import {
+  Search,
   Home,
   HomeFill,
   Exchange,
@@ -41,6 +33,8 @@ import {
   ChevronBigRight,
 } from "@ledgerhq/lumen-ui-react/symbols";
 import { CryptoIcon } from "@ledgerhq/crypto-icons";
+import { AnimatedPlaceholderInput } from "./components/AnimatedPlaceholderInput";
+import { ComponentGallery } from "./components/ComponentGallery";
 
 const CRYPTOS = [
   { name: "Ethereum", ticker: "ETH", ledgerId: "ethereum", price: "$1,911", balance: "0.0394339 ETH", value: "$393.32", trend: "+1.32%", positive: true },
@@ -300,6 +294,8 @@ function Dashboard() {
                 </div>
               </div>
             </div>
+
+            <ComponentGallery />
           </main>
         </div>
     </div>
@@ -307,25 +303,9 @@ function Dashboard() {
 }
 
 function App() {
-  const [view, setView] = useState<"playground" | "dashboard">("playground");
-
   return (
     <ThemeProvider colorScheme="dark">
-      <div className="bg-canvas min-h-screen">
-        <div className="flex justify-center pt-16">
-          <SegmentedControl
-            selectedValue={view}
-            onSelectedChange={(v) => setView(v as "playground" | "dashboard")}
-            tabLayout="fit"
-          >
-            <SegmentedControlButton value="playground">
-              AmountInput playground
-            </SegmentedControlButton>
-            <SegmentedControlButton value="dashboard">Dashboard</SegmentedControlButton>
-          </SegmentedControl>
-        </div>
-        {view === "playground" ? <AmountInputPlayground /> : <Dashboard />}
-      </div>
+      <Dashboard />
     </ThemeProvider>
   );
 }
